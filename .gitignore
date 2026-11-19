@@ -66,3 +66,9 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+# Codeblock configuration
+bin/
+obj/
+*.layout
+*.depend
