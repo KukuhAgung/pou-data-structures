@@ -1,12 +1,10 @@
-/* file   : fooddrop.cpp
-   pemilik: B (Fikri)
-   isi    : implementasi Queue baris dan minigame Food Drop (FSD bagian 6.1) */
+
 
 #include "fooddrop.h"
-#include <cstdlib>   // rand, srand
-#include <ctime>     // time, untuk seed angka acak
+#include <cstdlib>   
+#include <ctime>     
 
-/* ===== fungsi bantu (hanya dipakai di file ini) ===== */
+
 
 static void cetakBarisArena(Baris b) {
     /* I.S. b terdefinisi
@@ -38,7 +36,7 @@ static void tampilkanArena(QueueBaris Q, int posisi, int skor, int nyawa, int ba
     cout << "a=kiri  d=kanan  s=diam  q=berhenti" << endl;
 }
 
-/* ===== primitif Queue ===== */
+
 
 void createQueue(QueueBaris &Q) {
     Q.head = Nil;
@@ -81,15 +79,12 @@ void dequeue(QueueBaris &Q, adrBaris &P) {
 }
 
 void printQueue(adrBaris P) {
-    /* cetak setelah panggilan rekursif: elemen sesudah P (lebih atas)
-       tercetak lebih dulu, sehingga head tercetak paling bawah */
     if (P != Nil) {
         printQueue(P->next);
         cetakBarisArena(P->info);
     }
 }
 
-/* ===== subprogram utama Food Drop ===== */
 
 Baris generateBaris() {
     Baris b;
@@ -97,9 +92,8 @@ Baris generateBaris() {
         b.jalur[i] = '.';
     }
 
-    /* paling banyak 2 benda dari 3 jalur, jadi selalu tersisa minimal
-       1 jalur kosong (tanpa 'X') yang bisa dipakai Pou untuk menghindar */
-    int jumlahBenda = rand() % 3;    // 0, 1, atau 2
+
+    int jumlahBenda = rand() % 3;   
     int terisi = 0;
     while (terisi < jumlahBenda) {
         int j = rand() % FD_JALUR;
@@ -129,7 +123,7 @@ void geserPou(int &posisi, char arah) {
             cout << "Pou sudah di jalur paling kanan." << endl;
         }
     }
-    // 's': Pou diam, posisi tetap
+    
 }
 
 void cekTangkapan(Baris b, int posisi, int &skor, int &nyawa) {
@@ -146,22 +140,22 @@ void cekTangkapan(Baris b, int posisi, int &skor, int &nyawa) {
 void mainFoodDrop(Pou &p, ListMinigame &L) {
     if (!bisaMainMinigame(p)) {
         cout << "Pou terlalu lelah/sakit untuk bermain." << endl;
-        return;    // giliran dan status tidak berubah
+        return;    
     }
 
     srand(time(NULL));
 
-    /* isi arena awal: 5 baris terlihat */
+    
     QueueBaris Q;
     createQueue(Q);
     for (int i = 0; i < FD_BARIS_TERLIHAT; i++) {
         enqueue(Q, alokasiBaris(generateBaris()));
     }
 
-    int posisi = FD_JALUR / 2;    // mulai di jalur tengah
+    int posisi = FD_JALUR / 2;    
     int skor = 0;
     int nyawa = FD_NYAWA_AWAL;
-    int baris = 0;                // jumlah baris yang sudah sampai ke Pou
+    int baris = 0;                
     bool berhenti = false;
 
     while (nyawa > 0 && baris < FD_MAKS_BARIS && !berhenti) {
@@ -170,7 +164,7 @@ void mainFoodDrop(Pou &p, ListMinigame &L) {
 
         string perintah;
         if (!(cin >> perintah)) {
-            berhenti = true;      // input habis, anggap berhenti
+            berhenti = true;      
         } else {
             char c = ' ';
             if (perintah.length() == 1) {
@@ -185,14 +179,14 @@ void mainFoodDrop(Pou &p, ListMinigame &L) {
             } else if (c == 'a' || c == 'd' || c == 's') {
                 geserPou(posisi, c);
 
-                /* baris terbawah sampai ke Pou */
+      
                 adrBaris P;
                 dequeue(Q, P);
                 cekTangkapan(P->info, posisi, skor, nyawa);
                 delete P;
                 baris++;
 
-                /* baris baru muncul di atas */
+               
                 enqueue(Q, alokasiBaris(generateBaris()));
             } else {
                 cout << "Perintah tidak valid. Gunakan a, d, s, atau q." << endl;
@@ -200,14 +194,14 @@ void mainFoodDrop(Pou &p, ListMinigame &L) {
         }
     }
 
-    /* dealokasi semua baris yang tersisa */
+  
     adrBaris P;
     while (!isEmptyQueue(Q)) {
         dequeue(Q, P);
         delete P;
     }
 
-    /* hadiah (FSD 6.1): koin = skor / 5, XP = skor / 10 */
+    
     int koin = skor / 5;
     int xp = skor / 10;
 
@@ -232,7 +226,7 @@ void mainFoodDrop(Pou &p, ListMinigame &L) {
     tambahXP(p, xp);
     catatSkor(L, "FD", s);
 
-    /* satu sesi: energi -15, kesenangan +20, memakan 1 giliran */
+   
     ubahStatus(p, 0, 0, FD_EFEK_ENERGI, FD_EFEK_SENANG);
     majukanWaktu(p);
 }
