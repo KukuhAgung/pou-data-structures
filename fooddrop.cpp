@@ -7,8 +7,6 @@
 
 
 static void cetakBarisArena(Baris b) {
-    /* I.S. b terdefinisi
-       F.S. b tercetak dengan format " | M | . | X |" */
     cout << " |";
     for (int i = 0; i < FD_JALUR; i++) {
         cout << " " << b.jalur[i] << " |";
@@ -17,8 +15,6 @@ static void cetakBarisArena(Baris b) {
 }
 
 static void tampilkanArena(QueueBaris Q, int posisi, int skor, int nyawa, int baris) {
-    /* I.S. Q berisi baris yang terlihat, posisi jalur Pou terdefinisi
-       F.S. header, arena dari atas ke bawah, baris Pou, dan petunjuk tercetak */
     cout << endl;
     cout << "=== FOOD DROP | Skor " << skor
          << " | Nyawa " << nyawa << "/" << FD_NYAWA_AWAL
