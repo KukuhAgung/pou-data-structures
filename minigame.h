@@ -3,6 +3,8 @@
 
 #include "pou.h"
 
+const int MAKS_RIWAYAT = 10;
+
 struct Skor {
     int nilai, koinDidapat, giliranMain;
 };

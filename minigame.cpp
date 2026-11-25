@@ -1,5 +1,22 @@
 #include "minigame.h"
 #include <iomanip>
+#include <cctype>
+
+static string hurufBesar(string s) {
+    for (int i = 0; i < (int) s.length(); i++) {
+        s[i] = toupper(s[i]);
+    }
+    return s;
+}
+
+static void cetakRiwayatMinigame(adrMinigame M) {
+    cout << endl << "=== RIWAYAT " << hurufBesar(M->info.nama)
+         << " (" << M->info.id << ") ===" << endl;
+    cout << "Highscore: " << M->info.highscore
+         << " | Jumlah main: " << M->info.jumlahMain
+         << " | Tersimpan: " << nbSkor(M->skor) << "/" << MAKS_RIWAYAT << endl;
+    printSkor(M->skor);
+}
 
 void tambahKoin(Pou &p, int n) {
     p.koin += n;
@@ -10,8 +27,20 @@ void tambahXP(Pou &p, int n) {
 }
 
 void catatSkor(ListMinigame &L, string idGame, Skor s) {
-    cout << "[Riwayat] skor " << s.nilai << " untuk " << idGame
-         << " belum disimpan (stub B)." << endl;
+    adrMinigame M = findMinigame(L, idGame);
+    if (M == Nil) {
+        cout << "Minigame " << idGame << " tidak ditemukan, skor tidak dicatat." << endl;
+    } else {
+        insertSortedSkor(M->skor, alokasiSkor(s));
+        if (nbSkor(M->skor) > MAKS_RIWAYAT) {
+            deleteLastSkor(M->skor);
+        }
+
+        M->info.jumlahMain++;
+        if (s.nilai > M->info.highscore) {
+            M->info.highscore = s.nilai;
+        }
+    }
 }
 
 void createListMinigame(ListMinigame &L) {
@@ -132,5 +161,26 @@ void initRiwayat(ListMinigame &L) {
 }
 
 void tampilkanRiwayat(ListMinigame L) {
-    cout << "[Riwayat skor] belum dibuat (B)." << endl;
+    cout << endl << "Pilih riwayat (FD = Food Drop, SD = Sudoku, ALL = semua): ";
+    string pilihan;
+    cin >> pilihan;
+    pilihan = hurufBesar(pilihan);
+
+    if (pilihan == "ALL") {
+        if (L.first == Nil) {
+            cout << "Belum ada minigame terdaftar." << endl;
+        }
+        adrMinigame M = L.first;
+        while (M != Nil) {
+            cetakRiwayatMinigame(M);
+            M = M->next;
+        }
+    } else {
+        adrMinigame M = findMinigame(L, pilihan);
+        if (M == Nil) {
+            cout << "Pilihan tidak valid." << endl;
+        } else {
+            cetakRiwayatMinigame(M);
+        }
+    }
 }
