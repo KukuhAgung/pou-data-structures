@@ -198,8 +198,8 @@ void mainFoodDrop(Pou &p, ListMinigame &L) {
     }
 
     
-    int koin = skor / 5;
-    int xp = skor / 10;
+    int koin, xp;
+    hitungHadiah(skor, koin, xp);
 
     cout << endl << "=== HASIL FOOD DROP ===" << endl;
     if (nyawa <= 0) {

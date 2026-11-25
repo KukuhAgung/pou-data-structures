@@ -4,6 +4,8 @@
 #include "pou.h"
 
 const int MAKS_RIWAYAT = 10;
+const int PEMBAGI_KOIN = 5;
+const int PEMBAGI_XP = 10;
 
 struct Skor {
     int nilai, koinDidapat, giliranMain;
@@ -54,6 +56,7 @@ void printSkor(ListSkor S);
 int nbSkor(ListSkor S);
 
 void initRiwayat(ListMinigame &L);
+void hitungHadiah(int skor, int &koin, int &xp);
 void tampilkanRiwayat(ListMinigame L);
 
 #endif

@@ -165,6 +165,11 @@ void initRiwayat(ListMinigame &L) {
     insertLastMinigame(L, alokasiMinigame("SD", "Sudoku"));
 }
 
+void hitungHadiah(int skor, int &koin, int &xp) {
+    koin = skor / PEMBAGI_KOIN;
+    xp = skor / PEMBAGI_XP;
+}
+
 void tampilkanRiwayat(ListMinigame L) {
     cout << endl << "Pilih riwayat (FD = Food Drop, SD = Sudoku, ALL = semua): ";
     string pilihan;
