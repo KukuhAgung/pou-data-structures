@@ -24,6 +24,11 @@ void tambahKoin(Pou &p, int n) {
 
 void tambahXP(Pou &p, int n) {
     p.xp += n;
+    while (p.xp >= XP_PER_LEVEL) {
+        p.xp -= XP_PER_LEVEL;
+        p.level++;
+        cout << "Pou naik ke level " << p.level << "!" << endl;
+    }
 }
 
 void catatSkor(ListMinigame &L, string idGame, Skor s) {
