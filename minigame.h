@@ -51,6 +51,7 @@ void deleteLastSkor(ListSkor &S);
 void printSkor(ListSkor S);
 int nbSkor(ListSkor S);
 
+void initRiwayat(ListMinigame &L);
 void tampilkanRiwayat(ListMinigame L);
 
 #endif

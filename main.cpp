@@ -21,7 +21,7 @@ int main() {
     createListRuangan(rumah);
     createKulkas(kulkas);
     createToko(toko);
-    createListMinigame(riwayat);
+    initRiwayat(riwayat);
 
     // TODO: isi data awal (4 ruangan, isi kulkas, item toko, 2 minigame)
 

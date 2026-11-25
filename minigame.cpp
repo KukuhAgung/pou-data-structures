@@ -125,6 +125,12 @@ int nbSkor(ListSkor S) {
     return n;
 }
 
+void initRiwayat(ListMinigame &L) {
+    createListMinigame(L);
+    insertLastMinigame(L, alokasiMinigame("FD", "Food Drop"));
+    insertLastMinigame(L, alokasiMinigame("SD", "Sudoku"));
+}
+
 void tampilkanRiwayat(ListMinigame L) {
     cout << "[Riwayat skor] belum dibuat (B)." << endl;
 }
