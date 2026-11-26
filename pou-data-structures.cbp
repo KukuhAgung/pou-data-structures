@@ -32,7 +32,19 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="fooddrop.cpp" />
+		<Unit filename="fooddrop.h" />
+		<Unit filename="kulkas.cpp" />
+		<Unit filename="kulkas.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="minigame.cpp" />
+		<Unit filename="minigame.h" />
+		<Unit filename="pou.cpp" />
+		<Unit filename="pou.h" />
+		<Unit filename="sudoku.cpp" />
+		<Unit filename="sudoku.h" />
+		<Unit filename="toko.cpp" />
+		<Unit filename="toko.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
