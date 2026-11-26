@@ -55,17 +55,26 @@ void initPou(Pou &p, string nama);
 
 void tampilkanStatus(Pou p);
 /* I.S. p terdefinisi
-   F.S. status Pou tampil di layar */
+   F.S. status Pou tampil di layar dalam bentuk bar */
+
+void tampilkanPerubahan(Pou sebelum, Pou sesudah);
+/* I.S. sebelum dan sesudah terdefinisi
+   F.S. hanya status yang berubah yang ditampilkan, contoh "Lapar 60 -> 95" */
 
 /* ===== fungsi antarmodul milik A (boleh dipanggil B dan C) ===== */
 void ubahStatus(Pou &p, int dLapar, int dSehat, int dEnergi, int dSenang);
 /* F.S. status berubah sebesar delta, dijepit ke rentang 0..STAT_MAX */
 
 void majukanWaktu(Pou &p);
-/* F.S. giliran bertambah 1 dan status turun sesuai FSD bagian 5.1 */
+/* F.S. giliran bertambah 1, status turun sesuai FSD bagian 5.1,
+        lalu cekKondisi dipanggil */
 
 bool bisaMainMinigame(Pou p);
 /* mengembalikan true jika energi >= 20 dan kesehatan >= 20 */
+
+int bacaAngka();
+/* membaca satu angka dari cin; mengulang jika masukan bukan angka.
+   Boleh dipakai B dan C untuk membaca menu */
 
 /* ===== primitif DLL Ruangan (diisi A) ===== */
 void createListRuangan(ListRuangan &L);
@@ -74,7 +83,23 @@ void insertLastRuangan(ListRuangan &L, adrRuangan P);
 adrRuangan findRuangan(ListRuangan L, string id);
 void printRuangan(ListRuangan L);
 
-/* ===== subprogram utama A (diisi A) =====
-   geserKiri, geserKanan, mandi, tidur, cekKondisi */
+/* ===== subprogram utama A ===== */
+void cekKondisi(Pou p);
+/* F.S. peringatan tampil untuk setiap status di bawah STAT_KRITIS */
+
+void tampilkanPosisi(adrRuangan aktif);
+/* I.S. aktif tidak Nil
+   F.S. ruangan kiri, ruangan aktif, dan ruangan kanan tampil;
+        "(ujung)" jika tidak ada tetangga */
+
+void geserKiri(adrRuangan &aktif);
+void geserKanan(adrRuangan &aktif);
+/* F.S. aktif pindah ke prev / next; jika Nil, aktif tetap dan pesan tampil.
+        Tidak memakan giliran */
+
+void mandi(Pou &p);
+void tidur(Pou &p);
+/* F.S. status berubah, XP +5, lalu majukanWaktu dipanggil.
+        tidur ditolak (tanpa memakan giliran) jika energi >= 90 */
 
 #endif
