@@ -2,7 +2,7 @@
    pemilik: A (Kukuh) */
 
 #include "kulkas.h"
-#include "minigame.h"   // untuk tambahXP (milik B)
+#include "minigame.h"
 
 void createKulkas(ListKulkas &K) {
     K.first = Nil;
