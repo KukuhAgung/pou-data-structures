@@ -1,6 +1,7 @@
 /* file   : sudoku.h
    pemilik: C (Naya)
-   isi    : ADT Stack langkah (undo) untuk minigame Sudoku */
+   isi    : ADT Stack langkah (undo) untuk minigame Sudok */
+
 
 #ifndef SUDOKU_H_INCLUDED
 #define SUDOKU_H_INCLUDED
