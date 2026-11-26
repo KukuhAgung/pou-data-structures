@@ -4,8 +4,7 @@
 #include "pou.h"
 #include "minigame.h"
 
-/* fungsi bantu: menjepit nilai ke rentang 0..STAT_MAX.
-   static = hanya terlihat di file ini, tidak bentrok dengan file lain */
+
 static int jepit(int nilai) {
     if (nilai < 0) {
         return 0;
@@ -26,8 +25,6 @@ int bacaAngka() {
     cin.ignore(1000, '\n');
     return x;
 }
-
-/* ================= STATUS POU ================= */
 
 void initPou(Pou &p, string nama) {
     p.nama = nama;
@@ -120,8 +117,7 @@ bool bisaMainMinigame(Pou p) {
     return p.energi >= 20 && p.kesehatan >= 20;
 }
 
-/* ================= DLL RUANGAN ================= */
-
+/* DLL RUANGAN */
 void createListRuangan(ListRuangan &L) {
     L.first = Nil;
     L.last = Nil;
@@ -204,13 +200,13 @@ void geserKanan(adrRuangan &aktif) {
     }
 }
 
-/* ================= AKSI PERAWATAN ================= */
+/* AKSI PERAWATAN */
 
 void mandi(Pou &p) {
     Pou awal = p;
     ubahStatus(p, 0, 25, 0, 5);
-    tambahXP(p, 5);
     cout << "Pou mandi. (+5 XP)" << endl;
+    tambahXP(p, 5);
     tampilkanPerubahan(awal, p);
     majukanWaktu(p);
 }
@@ -222,8 +218,8 @@ void tidur(Pou &p) {
     }
     Pou awal = p;
     ubahStatus(p, -10, 0, 50, 0);
-    tambahXP(p, 5);
     cout << "Pou tidur. (+5 XP)" << endl;
+    tambahXP(p, 5);
     tampilkanPerubahan(awal, p);
     majukanWaktu(p);
 }
