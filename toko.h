@@ -52,9 +52,7 @@ void printItemKategori(adrKategori K, int levelPou);
 
 /* ===== subprogram utama Toko ===== */
 void bukaToko(Pou &p, ListToko &T, ListKulkas &K);
-/* I.S. p, T, K terdefinisi
-   F.S. pemain melihat dan membeli item; koin, kulkas, atau status berubah */
-
-/* TODO C: beliItem, cekSyaratBeli, terapkanRamuan */
-
+bool beliItem(Pou &p, ListToko T, ListKulkas &K, string idItem);
+bool cekSyaratBeli(Pou p, Item it, string &alasan);
+void terapkanRamuan(Pou &p, Item it);
 #endif
